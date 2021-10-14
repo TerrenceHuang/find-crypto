@@ -1,22 +1,22 @@
-import { StatusBar } from "expo-status-bar";
+import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { Platform, SafeAreaView, StyleSheet, StatusBar } from "react-native";
+
 import CryptoList from "./core/components/CryptoList";
 
 export default function App() {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.safeArea}>
       <CryptoList />
-      <StatusBar style="auto" />
-    </View>
+      <ExpoStatusBar style="auto" />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  safeArea: {
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
 });
