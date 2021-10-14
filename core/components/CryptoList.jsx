@@ -1,5 +1,6 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, FlatList, StyleSheet } from "react-native";
+
 import CryptoListItem from "./CryptoListItem";
 
 // TODO: Fake data need to remove and use the REST to get the real one
@@ -22,11 +23,15 @@ const DATA = [
 ];
 
 const CryptoList = () => {
+  const renderListItem = ({ item }) => {
+    return <CryptoListItem {...item} />;
+  };
   return (
-    <View>
-      <Text>Crypto List</Text>
-      <CryptoListItem />
-    </View>
+    <FlatList
+      data={DATA}
+      renderItem={renderListItem}
+      keyExtractor={(item) => item.id}
+    />
   );
 };
 
