@@ -1,12 +1,25 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
-const CryptoListItem = () => {
+const CryptoListItem = ({ name, current_price }) => {
   return (
-    <View>
-      <Text>Crypto List Item</Text>
+    <View style={styles.itemContainer}>
+      <Text style={styles.textColumn}>{name}</Text>
+      <Text style={styles.textColumn}>{current_price}</Text>
     </View>
   );
 };
 
 export default CryptoListItem;
+
+const styles = StyleSheet.create({
+  itemContainer: {
+    flex: 1,
+    flexDirection: "row",
+  },
+  textColumn: {
+    flexBasis: 1,
+    flexGrow: 1,
+    textAlign: "center",
+  },
+});

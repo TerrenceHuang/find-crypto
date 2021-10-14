@@ -16,7 +16,7 @@ export default function App() {
 const styles = StyleSheet.create({
   safeArea: {
     backgroundColor: "#fff",
-    alignItems: "center",
+    alignItems: "stretch",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
 });
