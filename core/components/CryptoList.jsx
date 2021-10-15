@@ -4,6 +4,7 @@ import { FlatList } from "react-native";
 import CryptoListItem from "./CryptoListItem";
 import CryptoListFooter from "./CryptoListFooter";
 import { getCoinsMarkets } from "../utils/CoinGecko";
+import CryptoListHeader from "./CryptoListHeader";
 
 const CryptoList = () => {
   const [data, setData] = useState([]);
@@ -64,6 +65,8 @@ const CryptoList = () => {
       renderItem={renderListItem}
       refreshing={isRefreshing}
       onRefresh={handleRefresh}
+      ListHeaderComponent={<CryptoListHeader />}
+      stickyHeaderIndices={[0]}
       ListFooterComponent={<CryptoListFooter isLoading={isLoadingMore} />}
       onEndReached={handleEndReach}
       onEndReachedThreshold={0.1}
