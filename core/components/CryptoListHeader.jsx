@@ -9,9 +9,14 @@ const CryptoListHeader = () => {
   // TODO: Show upper arrow and lower arrow depends on sorting
   return (
     <View style={styles.headerContainer}>
-      {columns.map(({ key, text }) => (
-        <TouchableOpacity key={key} style={styles.column}>
-          <Text style={styles.text}>{text}</Text>
+      {columns.map(({ key, text }, index) => (
+        <TouchableOpacity
+          key={key}
+          style={index === 0 ? styles.nameColumn : styles.numberColumn}
+        >
+          <Text style={index === 0 ? styles.nameText : styles.numberText}>
+            {text}
+          </Text>
         </TouchableOpacity>
       ))}
     </View>
@@ -24,16 +29,26 @@ const styles = StyleSheet.create({
   headerContainer: {
     flex: 1,
     flexDirection: "row",
-    padding: 5,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 5,
+    paddingBottom: 5,
     backgroundColor: "#ffffff",
   },
-  column: {
+  nameColumn: {
     flexBasis: 1,
     flexGrow: 1,
-    textAlign: "center",
   },
-  text: {
+  numberColumn: {
+    flexBasis: 1,
+    flexGrow: 1.5,
+  },
+  nameText: {
     fontWeight: "bold",
     textAlign: "center",
+  },
+  numberText: {
+    fontWeight: "bold",
+    textAlign: "right",
   },
 });
