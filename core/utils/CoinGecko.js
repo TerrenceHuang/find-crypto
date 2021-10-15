@@ -21,4 +21,12 @@ export const toSmallImageUrl = (imageUrl) => {
   return imageUrl.replace("large", "small");
 };
 
+export const getColumns = () => {
+  return [
+    { key: "name", text: "Coin" },
+    { key: "current_price", text: "Price" },
+    { key: "total_volume", text: "24h Volume" },
+  ];
+};
+
 export default coinGeckoAxios;
