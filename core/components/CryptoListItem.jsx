@@ -1,8 +1,10 @@
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 
+import { toSmallImageUrl } from "../utils/CoinGecko";
+
 const CryptoListItem = ({ name, current_price, total_volume, image }) => {
-  const smallImage = image.replace("large", "small");
+  const smallImage = toSmallImageUrl(image);
 
   return (
     <View style={styles.itemContainer}>

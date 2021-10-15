@@ -4,7 +4,6 @@ const coinGeckoAxios = axios.create({
   baseURL: "https://api.coingecko.com/api/v3/",
   headers: { accept: "application/json" },
 });
-export default coinGeckoAxios;
 
 export const getCoinsMarkets = ({ vsCurrency, perPage, page }) => {
   return coinGeckoAxios.request({
@@ -13,3 +12,8 @@ export const getCoinsMarkets = ({ vsCurrency, perPage, page }) => {
   });
 };
 
+export const toSmallImageUrl = (imageUrl) => {
+  return imageUrl.replace("large", "small");
+};
+
+export default coinGeckoAxios;
