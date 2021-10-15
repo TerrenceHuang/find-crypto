@@ -11,7 +11,6 @@ export const getCoinsMarkets = ({
   page,
   order = "market_cap_desc",
 }) => {
-  console.log(`order: ${order}`);
   return coinGeckoAxios.request({
     url: `/coins/markets?vs_currency=${vsCurrency}&per_page=${perPage}&page=${page}&order=${order}`,
     method: "GET",
