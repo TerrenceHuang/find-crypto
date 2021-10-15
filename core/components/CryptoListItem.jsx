@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
   itemContainer: {
     flex: 1,
     flexDirection: "row",
+    padding: 10,
   },
   imageColumn: {
     flexBasis: 1,
