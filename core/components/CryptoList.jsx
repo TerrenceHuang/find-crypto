@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FlatList } from "react-native";
 
 import CryptoListItem from "./CryptoListItem";
+import CryptoListFooter from "./CryptoListFooter";
 import { getCoinsMarkets } from "../utils/CoinGecko";
 
 const CryptoList = () => {
@@ -41,8 +42,9 @@ const CryptoList = () => {
   return (
     <FlatList
       data={data}
-      renderItem={renderListItem}
       keyExtractor={(item) => item.id}
+      renderItem={renderListItem}
+      ListFooterComponent={<CryptoListFooter isLoading={isLoadingMore} />}
       onEndReached={handleEndReach}
       onEndReachedThreshold={0.1}
       initialNumToRender={20}
