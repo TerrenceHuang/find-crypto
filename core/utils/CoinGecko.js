@@ -5,9 +5,15 @@ const coinGeckoAxios = axios.create({
   headers: { accept: "application/json" },
 });
 
-export const getCoinsMarkets = ({ vsCurrency, perPage, page }) => {
+export const getCoinsMarkets = ({
+  vsCurrency,
+  perPage,
+  page,
+  order = "market_cap_desc",
+}) => {
+  console.log(`order: ${order}`);
   return coinGeckoAxios.request({
-    url: `/coins/markets?vs_currency=${vsCurrency}&per_page=${perPage}&page=${page}`,
+    url: `/coins/markets?vs_currency=${vsCurrency}&per_page=${perPage}&page=${page}&order=${order}`,
     method: "GET",
   });
 };
