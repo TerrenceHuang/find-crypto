@@ -1,45 +1,73 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList } from "react-native";
 
 import CryptoListItem from "./CryptoListItem";
-
-// TODO: Fake data need to remove and use the REST to get the real one
-const DATA = [
-  {
-    id: "bitcoin",
-    name: "Bitcoin",
-    current_price: 57793,
-    total_volume: 39208187835,
-    image:
-      "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579",
-  },
-  {
-    id: "ethereum",
-    name: "Ethereum",
-    current_price: 3656.33,
-    total_volume: 22661498389,
-    image:
-      "https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348880",
-  },
-  {
-    id: "binancecoin",
-    name: "Binance Coin",
-    current_price: 480.11,
-    total_volume: 2903013490,
-    image:
-      "https://assets.coingecko.com/coins/images/825/large/binance-coin-logo.png?1547034615",
-  },
-];
+import CryptoListFooter from "./CryptoListFooter";
+import { getCoinsMarkets } from "../utils/CoinGecko";
 
 const CryptoList = () => {
+  const [data, setData] = useState([]);
+  const [page, setPage] = useState(1);
+  const [shouldFetch, setShouldFetch] = useState(true);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [isLoadingMore, setIsLoadingMore] = useState(true);
+
+  // TODO: Is there a max number of coin types? don't fetch more than that
+  useEffect(() => {
+    if (!shouldFetch) return;
+
+    let abortFetch = false;
+
+    const fetchPageAndAppendToData = () => {
+      getCoinsMarkets({ vsCurrency: "usd", perPage: 25, page: page })
+        .then((response) => {
+          if (abortFetch) return;
+
+          page == 1
+            ? setData(response.data)
+            : setData([...data, ...response.data]);
+
+          setIsLoadingMore(false);
+          setIsRefreshing(false);
+        })
+        .catch((error) => alert(error));
+    };
+
+    fetchPageAndAppendToData();
+    setShouldFetch(false);
+
+    return () => (abortFetch = true);
+  }, [page, isRefreshing]);
+
+  const handleRefresh = () => {
+    setIsRefreshing(true);
+    setPage(1);
+    setShouldFetch(true);
+  };
+
+  const handleEndReach = () => {
+    if (isLoadingMore) return;
+
+    setIsLoadingMore(true);
+    setPage(page + 1);
+    setShouldFetch(true);
+  };
+
   const renderListItem = ({ item }) => {
     return <CryptoListItem {...item} />;
   };
+
   return (
     <FlatList
-      data={DATA}
-      renderItem={renderListItem}
+      data={data}
       keyExtractor={(item) => item.id}
+      renderItem={renderListItem}
+      refreshing={isRefreshing}
+      onRefresh={handleRefresh}
+      ListFooterComponent={<CryptoListFooter isLoading={isLoadingMore} />}
+      onEndReached={handleEndReach}
+      onEndReachedThreshold={0.1}
+      initialNumToRender={20}
     />
   );
 };
