@@ -6,14 +6,33 @@ import { getCoinsMarkets } from "../utils/CoinGecko";
 
 const CryptoList = () => {
   const [data, setData] = useState([]);
+  const [page, setPage] = useState(1);
+  const [isLoadingMore, setIsLoadingMore] = useState(true);
 
+  // TODO: Is there a max number of coin types? don't fetch more than that
   useEffect(() => {
-    getCoinsMarkets({ vsCurrency: "usd", perPage: 25, page: 1 })
-      .then((response) => {
-        setData(response.data);
-      })
-      .catch((error) => alert(error));
-  }, []);
+    const fetchPageAndAppendToData = () => {
+      getCoinsMarkets({ vsCurrency: "usd", perPage: 25, page: page })
+        .then((response) => {
+          page == 1
+            ? setData(response.data)
+            : setData([...data, ...response.data]);
+
+          setIsLoadingMore(false);
+        })
+        .catch((error) => alert(error));
+    };
+
+    fetchPageAndAppendToData();
+
+  }, [page]);
+
+  const handleEndReach = () => {
+    if (isLoadingMore) return;
+
+    setIsLoadingMore(true);
+    setPage(page + 1);
+  };
 
   const renderListItem = ({ item }) => {
     return <CryptoListItem {...item} />;
@@ -24,6 +43,9 @@ const CryptoList = () => {
       data={data}
       renderItem={renderListItem}
       keyExtractor={(item) => item.id}
+      onEndReached={handleEndReach}
+      onEndReachedThreshold={0.1}
+      initialNumToRender={20}
     />
   );
 };
