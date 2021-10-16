@@ -1,13 +1,13 @@
 import React from "react";
 import { ActivityIndicator, Platform } from "react-native";
 
-const CryptoListFooter = ({ isLoading }) =>
+const CryptoActivityIndicator = ({ isLoading }) =>
   isLoading ? (
     <ActivityIndicator
       animating
-      color={Platform.OS === "android" ? "#0000ff" : null}
+      color={Platform.OS === "ios" ? null : "#0000ff"}
       size="large"
     />
   ) : null;
 
-export default CryptoListFooter;
+export default CryptoActivityIndicator;

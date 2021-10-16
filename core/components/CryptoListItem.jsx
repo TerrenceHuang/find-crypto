@@ -9,15 +9,21 @@ const CryptoListItem = React.memo(
 
     return (
       <View style={styles.itemContainer}>
-        <Image
-          style={styles.imageColumn}
-          source={{
-            uri: smallImage,
-          }}
-        />
-        <Text style={styles.textColumn}>{name}</Text>
-        <Text style={styles.textColumn}>{current_price}</Text>
-        <Text style={styles.textColumn}>{total_volume}</Text>
+        <View style={styles.nameColumn}>
+          <Image
+            style={styles.image}
+            source={{
+              uri: smallImage,
+            }}
+          />
+          <Text style={styles.imageText}>{name}</Text>
+        </View>
+        <Text style={[styles.numberColumn, styles.numberText]}>
+          {current_price}
+        </Text>
+        <Text style={[styles.numberColumn, styles.numberText]}>
+          {total_volume}
+        </Text>
       </View>
     );
   }
@@ -29,16 +35,31 @@ const styles = StyleSheet.create({
   itemContainer: {
     flex: 1,
     flexDirection: "row",
-    padding: 10,
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingTop: 5,
+    paddingBottom: 5,
+    alignItems: "center",
+    borderTopWidth: 0.2,
   },
-  imageColumn: {
-    flexBasis: 1,
-    flexGrow: 1,
+  image: {
+    alignSelf: "center",
+    width: 20,
+    height: 20,
     resizeMode: "contain",
   },
-  textColumn: {
-    flexBasis: 1,
-    flexGrow: 2,
+  imageText: {
     textAlign: "center",
+  },
+  nameColumn: {
+    flexBasis: 1,
+    flexGrow: 1,
+  },
+  numberColumn: {
+    flexBasis: 1,
+    flexGrow: 1.5,
+  },
+  numberText: {
+    textAlign: "right",
   },
 });
