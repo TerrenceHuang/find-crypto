@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FlatList } from "react-native";
 
 import CryptoListItem from "./CryptoListItem";
-import CryptoListFooter from "./CryptoListFooter";
+import CryptoActivityIndicator from "./CryptoActivityIndicator";
 import { getCoinsMarkets } from "../utils/CoinGecko";
 import CryptoListHeader from "./CryptoListHeader";
 
@@ -81,7 +81,9 @@ const CryptoList = () => {
     setShouldFetch(true);
   };
 
-  return (
+  return data.length === 0 ? (
+    <CryptoActivityIndicator isLoading={true} />
+  ) : (
     <FlatList
       data={data}
       keyExtractor={(item) => item.id}
