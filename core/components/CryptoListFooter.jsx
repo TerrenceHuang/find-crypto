@@ -5,7 +5,7 @@ const CryptoListFooter = ({ isLoading }) =>
   isLoading ? (
     <ActivityIndicator
       animating
-      color={Platform.OS === "android" ? "#0000ff" : null}
+      color={Platform.OS === "ios" ? null : "#0000ff"}
       size="large"
     />
   ) : null;
