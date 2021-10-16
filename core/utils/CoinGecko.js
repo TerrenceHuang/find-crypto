@@ -23,8 +23,9 @@ export const toSmallImageUrl = (imageUrl) => {
 
 export const getColumns = () => {
   return [
+    // sort key name not working, coin_name acting wield, so using id to sort
     { key: "id", text: "Coin" },
-    { key: "current_price", text: "Price" }, // TODO: Fix the sorting key
+    { key: "price", text: "Price" },
     { key: "volume", text: "24h Volume" },
   ];
 };
