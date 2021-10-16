@@ -1,7 +1,7 @@
 import React from "react";
 import { ActivityIndicator, Platform } from "react-native";
 
-const CryptoListFooter = ({ isLoading }) =>
+const CryptoActivityIndicator = ({ isLoading }) =>
   isLoading ? (
     <ActivityIndicator
       animating
@@ -10,4 +10,4 @@ const CryptoListFooter = ({ isLoading }) =>
     />
   ) : null;
 
-export default CryptoListFooter;
+export default CryptoActivityIndicator;

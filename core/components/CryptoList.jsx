@@ -96,7 +96,9 @@ const CryptoList = () => {
         />
       )}
       stickyHeaderIndices={[0]}
-      ListFooterComponent={<CryptoListFooter isLoading={isLoadingMore} />}
+      ListFooterComponent={
+        <CryptoActivityIndicator isLoading={isLoadingMore} />
+      }
       onEndReached={handleEndReach}
       onEndReachedThreshold={0.1}
       initialNumToRender={20}
