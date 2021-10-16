@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 import { getColumns } from "../utils/CoinGecko";
 
@@ -15,6 +16,16 @@ const CryptoListHeader = ({ selectedColumn, direction, onPress }) => {
             onPress(key);
           }}
         >
+          {selectedColumn === key && (
+            <Ionicons
+              name={
+                direction === "asc"
+                  ? "md-arrow-up-outline"
+                  : "md-arrow-down-outline"
+              }
+              size={12}
+            />
+          )}
           <Text style={index === 0 ? styles.nameText : styles.numberText}>
             {text}
           </Text>
@@ -37,12 +48,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
   },
   nameColumn: {
-    flexBasis: 1,
-    flexGrow: 1,
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
   },
   numberColumn: {
-    flexBasis: 1,
-    flexGrow: 1.5,
+    flex: 1.5,
+    flexDirection: "row",
+    justifyContent: "flex-end",
   },
   nameText: {
     fontWeight: "bold",
