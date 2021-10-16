@@ -23,9 +23,9 @@ export const toSmallImageUrl = (imageUrl) => {
 
 export const getColumns = () => {
   return [
-    { key: "name", text: "Coin" },
-    { key: "current_price", text: "Price" },
-    { key: "total_volume", text: "24h Volume" },
+    { key: "id", text: "Coin" },
+    { key: "current_price", text: "Price" }, // TODO: Fix the sorting key
+    { key: "volume", text: "24h Volume" },
   ];
 };
 
