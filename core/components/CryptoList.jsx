@@ -22,7 +22,15 @@ const CryptoList = () => {
     let abortFetch = false;
 
     const fetchPageAndAppendToData = () => {
-      getCoinsMarkets({ vsCurrency: "usd", perPage: 25, page: page })
+      getCoinsMarkets({
+        vsCurrency: "usd",
+        perPage: 25,
+        page: page,
+        order:
+          selectedColumn === null
+            ? undefined
+            : `${selectedColumn}_${direction}`,
+      })
         .then((response) => {
           if (abortFetch) return;
 
@@ -40,7 +48,7 @@ const CryptoList = () => {
     setShouldFetch(false);
 
     return () => (abortFetch = true);
-  }, [page, isRefreshing]);
+  }, [page, isRefreshing, selectedColumn, direction]);
 
   const renderListItem = ({ item }) => {
     return <CryptoListItem {...item} />;
