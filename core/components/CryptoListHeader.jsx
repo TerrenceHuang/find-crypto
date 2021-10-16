@@ -4,15 +4,16 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { getColumns } from "../utils/CoinGecko";
 
 const columns = getColumns();
-// TODO: Touch the header column should trigger sorting and reload
-const CryptoListHeader = () => {
-  // TODO: Show upper arrow and lower arrow depends on sorting
+const CryptoListHeader = ({ selectedColumn, direction, onPress }) => {
   return (
     <View style={styles.headerContainer}>
       {columns.map(({ key, text }, index) => (
         <TouchableOpacity
           key={key}
           style={index === 0 ? styles.nameColumn : styles.numberColumn}
+          onPress={() => {
+            onPress(key);
+          }}
         >
           <Text style={index === 0 ? styles.nameText : styles.numberText}>
             {text}

@@ -12,6 +12,8 @@ const CryptoList = () => {
   const [shouldFetch, setShouldFetch] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(true);
+  const [selectedColumn, setSelectedColumn] = useState(null);
+  const [direction, setDirection] = useState("asc");
 
   // TODO: Is there a max number of coin types? don't fetch more than that
   useEffect(() => {
@@ -40,6 +42,10 @@ const CryptoList = () => {
     return () => (abortFetch = true);
   }, [page, isRefreshing]);
 
+  const renderListItem = ({ item }) => {
+    return <CryptoListItem {...item} />;
+  };
+
   const handleRefresh = () => {
     setIsRefreshing(true);
     setPage(1);
@@ -54,8 +60,17 @@ const CryptoList = () => {
     setShouldFetch(true);
   };
 
-  const renderListItem = ({ item }) => {
-    return <CryptoListItem {...item} />;
+  const onHeaderColumnPress = (key) => {
+    if (key === selectedColumn) {
+      direction === "asc" ? setDirection("desc") : setDirection("asc");
+    } else {
+      setSelectedColumn(key);
+      setDirection("asc");
+    }
+
+    setData([]);
+    setPage(1);
+    setShouldFetch(true);
   };
 
   return (
@@ -65,7 +80,13 @@ const CryptoList = () => {
       renderItem={renderListItem}
       refreshing={isRefreshing}
       onRefresh={handleRefresh}
-      ListHeaderComponent={<CryptoListHeader />}
+      ListHeaderComponent={() => (
+        <CryptoListHeader
+          selectedColumn={selectedColumn}
+          direction={direction}
+          onPress={onHeaderColumnPress}
+        />
+      )}
       stickyHeaderIndices={[0]}
       ListFooterComponent={<CryptoListFooter isLoading={isLoadingMore} />}
       onEndReached={handleEndReach}
