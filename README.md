@@ -1,4 +1,5 @@
 # Find Crypto
 
 Find Crypto is a APP to help you find the right crypto currency.
-![Find Crypto Home Page](/images/find-crypto-home.png)
+
+<img src="images/find-crypto-home.png" alt="Find Crypto Home Page" width="300"/>
