@@ -1,11 +1,21 @@
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import React from "react";
-import { Platform, SafeAreaView, StyleSheet, StatusBar } from "react-native";
+import {
+  Platform,
+  SafeAreaView,
+  StyleSheet,
+  StatusBar,
+  View,
+} from "react-native";
 
 import CryptoList from "./core/components/CryptoList";
 
 export default function App() {
-  return (
+  return Platform.OS === "web" ? (
+    <View style={styles.webContainer}>
+      <CryptoList />
+    </View>
+  ) : (
     <SafeAreaView style={styles.safeArea}>
       <CryptoList />
       <ExpoStatusBar style="auto" />
@@ -14,6 +24,10 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+  webContainer: {
+    height: "100vh",
+    justifyContent: "center",
+  },
   safeArea: {
     flex: 1,
     justifyContent: "center",

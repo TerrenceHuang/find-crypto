@@ -102,7 +102,7 @@ const CryptoList = () => {
         <CryptoActivityIndicator isLoading={isLoadingMore} />
       }
       onEndReached={handleEndReach}
-      onEndReachedThreshold={0.1}
+      onEndReachedThreshold={0.5}
       initialNumToRender={20}
     />
   );
