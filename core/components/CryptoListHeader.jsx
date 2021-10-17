@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     paddingBottom: 5,
     backgroundColor: "#ffffff",
-    borderBottomWidth: 0.2,
+    borderBottomWidth: 0.3,
   },
   nameColumn: {
     flex: 1,
