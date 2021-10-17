@@ -24,3 +24,13 @@ Also the crypto list can be order by name, price and volume. Click on the column
 
 **NOTE:**
 When Click on the coin column, it will use `id` to sort, because sort key `name` not working, `coin_name` acting wield.
+
+# Installation
+
+There are two ways to run the APP, the easiest way is with Expo CLI, another is to use React Native CLI. There is a good document about these, see more at [Setting up the development environment](https://reactnative.dev/docs/environment-setup).
+
+In order to build and run the APP, we needs to install NodeJs on the system, make sure the version is higher than 12.
+
+Next we can clone the repository onto the system.
+
+To install the dependencies run `npm install` or `yarn install` in the terminal
