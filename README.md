@@ -53,3 +53,11 @@ After that we can run `expo start` in the terminal to build and start the develo
 The APP can also be run in cellphone emulators. Make sure the emulator is setup in your development environment. To start ios emulator press `i` in the terminal. To Start Android emulator press `a` in the terminal.
 
 If you want to run on the web press `w` in the terminal then a browser tab will be opened with the APP.
+
+## Run with React Native CLI
+
+React Native CLI can build the APP and install it to the ios and Android simulator. But there are much more thing needs to be down first. Please follow the guide in [Setting up the development environment](https://reactnative.dev/docs/environment-setup).
+
+After setting up we can run `npx react-native run-ios` to start the ios simulator with the app installed, `npx react-native run-android` to start with the Android simulator.
+
+**NOTE:** Android 10 (Q) SDK is required, simulator of other version won't work.
