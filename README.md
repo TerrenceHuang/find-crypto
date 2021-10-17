@@ -35,3 +35,21 @@ In order to build and run the APP, we needs to install NodeJs on the system, mak
 Next we can clone the repository onto the system.
 
 To install the dependencies run `npm install` or `yarn install` in the terminal
+
+# Run the APP
+
+## Run with Expo
+
+To run with Expo we also need the expo CLI to be installed.
+
+```
+npm installed -g expo-cli
+```
+
+Expo can let us run and test the APP without installing it to the mobile device. This can be achieve by the [Expo Go APP](https://expo.dev/client). Install it on the phone first.
+
+After that we can run `expo start` in the terminal to build and start the development server. The command line will show a QR code, use the cell phone to scan it then it will open the Expo Go APP to run the Find Crypto APP.
+
+The APP can also be run in cellphone emulators. Make sure the emulator is setup in your development environment. To start ios emulator press `i` in the terminal. To Start Android emulator press `a` in the terminal.
+
+If you want to run on the web press `w` in the terminal then a browser tab will be opened with the APP.
