@@ -19,7 +19,7 @@ const CryptoListItem = React.memo(
           <Text style={styles.imageText}>{name}</Text>
         </View>
         <Text style={[styles.numberColumn, styles.numberText]}>
-          {current_price}
+          ${current_price}
         </Text>
         <Text style={[styles.numberColumn, styles.numberText]}>
           {total_volume}
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     paddingBottom: 5,
     alignItems: "center",
-    borderTopWidth: 0.2,
+    borderBottomWidth: 0.2,
   },
   image: {
     alignSelf: "center",
