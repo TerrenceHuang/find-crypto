@@ -90,19 +90,23 @@ const CryptoList = () => {
       renderItem={renderListItem}
       refreshing={isRefreshing}
       onRefresh={handleRefresh}
-      ListHeaderComponent={() => (
+      ListHeaderComponent={
         <CryptoListHeader
           selectedColumn={selectedColumn}
           direction={direction}
-          onPress={onHeaderColumnPress}
+          onColumnPress={onHeaderColumnPress}
+          onSyncPress={() => {
+            setData([]);
+            handleRefresh();
+          }}
         />
-      )}
+      }
       stickyHeaderIndices={[0]}
       ListFooterComponent={
         <CryptoActivityIndicator isLoading={isLoadingMore} />
       }
       onEndReached={handleEndReach}
-      onEndReachedThreshold={0.1}
+      onEndReachedThreshold={0.5}
       initialNumToRender={20}
     />
   );

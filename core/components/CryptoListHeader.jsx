@@ -1,19 +1,39 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import { getColumns } from "../utils/CoinGecko";
 
 const columns = getColumns();
-const CryptoListHeader = ({ selectedColumn, direction, onPress }) => {
+const CryptoListHeader = ({
+  selectedColumn,
+  direction,
+  onColumnPress,
+  onSyncPress,
+}) => {
   return (
     <View style={styles.headerContainer}>
+      {Platform.OS === "web" && (
+        <TouchableOpacity
+          onPress={() => {
+            onSyncPress();
+          }}
+        >
+          <Ionicons name="sync" size={20} />
+        </TouchableOpacity>
+      )}
       {columns.map(({ key, text }, index) => (
         <TouchableOpacity
           key={key}
           style={index === 0 ? styles.nameColumn : styles.numberColumn}
           onPress={() => {
-            onPress(key);
+            onColumnPress(key);
           }}
         >
           {selectedColumn === key && (
@@ -41,11 +61,12 @@ const styles = StyleSheet.create({
   headerContainer: {
     flex: 1,
     flexDirection: "row",
-    paddingLeft: 20,
-    paddingRight: 20,
+    paddingLeft: Platform.OS === "web" ? 0 : 15,
+    paddingRight: 15,
     paddingTop: 5,
     paddingBottom: 5,
     backgroundColor: "#ffffff",
+    borderBottomWidth: 0.2,
   },
   nameColumn: {
     flex: 1,
