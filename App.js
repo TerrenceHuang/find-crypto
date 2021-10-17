@@ -15,6 +15,8 @@ export default function App() {
 
 const styles = StyleSheet.create({
   safeArea: {
+    flex: 1,
+    justifyContent: "center",
     backgroundColor: "#fff",
     alignItems: "stretch",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
