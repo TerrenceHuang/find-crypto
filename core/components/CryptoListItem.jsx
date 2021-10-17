@@ -19,7 +19,7 @@ const CryptoListItem = React.memo(
           <Text style={styles.imageText}>{name}</Text>
         </View>
         <Text style={[styles.numberColumn, styles.numberText]}>
-          {current_price}
+          ${current_price}
         </Text>
         <Text style={[styles.numberColumn, styles.numberText]}>
           {total_volume}
