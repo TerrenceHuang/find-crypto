@@ -6,13 +6,23 @@ import {
   StyleSheet,
   StatusBar,
   View,
+  useWindowDimensions,
 } from "react-native";
 
 import CryptoList from "./core/components/CryptoList";
 
 export default function App() {
+  const window = useWindowDimensions();
+
   return Platform.OS === "web" ? (
-    <View style={styles.webContainer}>
+    <View
+      style={[
+        styles.webContainer,
+        window.width < 768
+          ? styles.webContainerSmallWidth
+          : styles.webContainerLargeWidth,
+      ]}
+    >
       <CryptoList />
     </View>
   ) : (
@@ -27,6 +37,15 @@ const styles = StyleSheet.create({
   webContainer: {
     height: "100vh",
     justifyContent: "center",
+    padding: 20,
+  },
+  webContainerSmallWidth: {
+    width: "100%",
+  },
+  webContainerLargeWidth: {
+    width: 768,
+    marginLeft: "auto",
+    marginRight: "auto",
   },
   safeArea: {
     flex: 1,
