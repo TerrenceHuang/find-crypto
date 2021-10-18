@@ -9,7 +9,7 @@ import CryptoListHeader from "./CryptoListHeader";
 const CryptoList = () => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
-  const [shouldFetch, setShouldFetch] = useState(true);
+  const [refreshTime, setRefreshTime] = useState(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(true);
   const [selectedColumn, setSelectedColumn] = useState(null);
@@ -17,7 +17,6 @@ const CryptoList = () => {
 
   // TODO: Is there a max number of coin types? don't fetch more than that
   useEffect(() => {
-    if (!shouldFetch) return;
 
     let abortFetch = false;
 
@@ -45,10 +44,9 @@ const CryptoList = () => {
     };
 
     fetchPageAndAppendToData();
-    setShouldFetch(false);
 
     return () => (abortFetch = true);
-  }, [page, isRefreshing, selectedColumn, direction]);
+  }, [page, refreshTime, selectedColumn, direction]);
 
   const renderListItem = ({ item }) => {
     return <CryptoListItem {...item} />;
@@ -56,8 +54,8 @@ const CryptoList = () => {
 
   const handleRefresh = () => {
     setIsRefreshing(true);
+    setRefreshTime(new Date().toString());
     setPage(1);
-    setShouldFetch(true);
   };
 
   const handleEndReach = () => {
@@ -65,7 +63,6 @@ const CryptoList = () => {
 
     setIsLoadingMore(true);
     setPage(page + 1);
-    setShouldFetch(true);
   };
 
   const onHeaderColumnPress = (key) => {
@@ -78,7 +75,6 @@ const CryptoList = () => {
 
     setData([]);
     setPage(1);
-    setShouldFetch(true);
   };
 
   return data.length === 0 ? (
